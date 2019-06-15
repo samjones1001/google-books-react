@@ -20,7 +20,7 @@ export const testData = {"items" : [
   },
   {
     "title": "Python Programming",
-    "authors": ["John M. Zelle"],
+    "authors": ["John M. Zelle", "Another Author"],
     "publisher": "Franklin, Beedle & Associates, Inc.",
     "imageLink": "http://books.google.com/books/content?id=aJQILlLxRmAC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api" ,
     "infoLink": "http://books.google.co.uk/books?id=aJQILlLxRmAC&dq=programming&hl=&source=gbs_api"

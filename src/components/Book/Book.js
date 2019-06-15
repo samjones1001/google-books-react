@@ -8,7 +8,7 @@ const Book = (props) => {
 
   const buildAuthorString = () => {
     return authors !== undefined
-      ? authors[0]
+      ? authors.join(', ')
       : 'No author found'
   }
 
