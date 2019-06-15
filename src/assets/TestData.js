@@ -10,7 +10,6 @@ export const testData = {"items" : [
     "title": "COMPUTER PROGRAMMING IN C",
     "authors": ["V. RAJARAMAN"],
     "publisher": "PHI Learning Pvt. Ltd.",
-    "imageLink": "http://books.google.com/books/content?id=Rl-F95_f0GoC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api" ,
     "infoLink": "https://play.google.com/store/books/details?id=Rl-F95_f0GoC&source=gbs_api"
   },
   {

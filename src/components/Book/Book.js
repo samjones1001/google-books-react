@@ -1,7 +1,11 @@
 import React from 'react';
 
 const Book = (props) => {
-  const { title, imageLink, authors, publisher, infoLink } = props
+  const { title, authors, publisher, infoLink } = props
+  const imageLink = props.imageLink !== undefined
+    ? props.imageLink
+    : '../../assets/book-placeholder.png'
+    
   return (
     <div data-test="component-book" { ...props }>
       <h3 data-test="book-title">{ title }</h3>

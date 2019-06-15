@@ -31,7 +31,7 @@ describe('Book component', () => {
     it('renders the passed image', () => {
       const imageLink = props.imageLink;
       let imageElement = wrapper.find("[data-test='book-image']");
-      expect(imageElement.prop('src')).toEqual(imageLink);
+      expect(imageElement.prop("src")).toEqual(imageLink);
     });
 
     it('renders the passed author', () => {
@@ -52,4 +52,23 @@ describe('Book component', () => {
       expect(infoLinkElement.prop('href')).toEqual(infoLink);
     });
   });
+
+  describe('when passed no image', () => {
+    const props = testData.items[1];
+
+    beforeEach(() => {
+      wrapper = shallow(<Book { ...props }/>);
+    });
+
+    it('renders without crashing', () => {
+      const bookComponent = wrapper.find("[data-test='component-book']");
+      expect(bookComponent.exists()).toBe(true);
+    });
+
+    it('renders with a placeholder image', () => {
+      const imageLink = "../../assets/book-placeholder.png";
+      let imageElement = wrapper.find("[data-test='book-image']");
+      expect(imageElement.prop("src")).toEqual(imageLink);
+    });
+  })
 });
