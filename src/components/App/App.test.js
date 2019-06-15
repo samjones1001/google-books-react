@@ -1,11 +1,8 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
-import EnzymeAdapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 
 import App from './App';
 import BookContainer from '../BookContainer/BookContainer';
-
-Enzyme.configure({ adapter: new EnzymeAdapter() })
 
 describe('App Component', () => {
   let wrapper;
