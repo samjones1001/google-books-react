@@ -4,16 +4,16 @@ const Book = (props) => {
   const { title, authors, infoLink } = props
   const imageLink = props.imageLink !== undefined
     ? props.imageLink
-    : '../../book-placeholder.png'
+    : require('../../assets/book-placeholder.png');
 
   const publisher = props.publisher !== undefined
     ? props.publisher
-    : 'No publiher found'
+    : 'No publiher found';
 
   const buildAuthorString = () => {
     return authors !== undefined
       ? authors.join(', ')
-      : 'No author found'
+      : 'No author found';
   }
 
   return (
@@ -24,7 +24,7 @@ const Book = (props) => {
       <p data-test="book-publisher">{ publisher }</p>
       <a href={ infoLink } data-test="book-info-link">More Info</a>
     </div>
-  )
+  );
 }
 
 export default Book;
