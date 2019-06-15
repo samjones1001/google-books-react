@@ -1,9 +1,16 @@
 import React from 'react';
+import Book from '../Book/Book';
 
-const BookContainer = () => {
+const BookContainer = (props) => {
+  const { books } = props;
+
   return (
     <div data-test="component-book-container">
-      Book Container Component
+      { books.map((book, index) => (
+        <div data-test="book-div" key={index}>
+          <Book { ...book }/>
+        </div>
+      ))}
     </div>
   )
 }
