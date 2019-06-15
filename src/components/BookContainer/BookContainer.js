@@ -7,7 +7,7 @@ const BookContainer = (props) => {
   return (
     <div data-test="component-book-container">
       { books.map((book, index) => (
-        <Book { ...book } key="index"/>
+        <Book { ...book } key={index}/>
       ))}
     </div>
   )

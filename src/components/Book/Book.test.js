@@ -29,7 +29,7 @@ describe('Book component', () => {
     });
 
     it('renders the passed image', () => {
-      const imageLink = props.imageLink;
+      const imageLink = props.imagelink;
       const imageElement = wrapper.find("[data-test='book-image']");
       expect(imageElement.prop("src")).toEqual(imageLink);
     });
@@ -47,7 +47,7 @@ describe('Book component', () => {
     });
 
     it('renders a link to the book\'s info page', () => {
-      const infoLink = testData.items[0].infoLink;
+      const infoLink = testData.items[0].infolink;
       const infoLinkElement = wrapper.find("[data-test='book-info-link']");
       expect(infoLinkElement.prop('href')).toEqual(infoLink);
     });
