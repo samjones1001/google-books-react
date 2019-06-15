@@ -66,7 +66,7 @@ describe('Book component', () => {
     });
 
     it('renders with a placeholder image', () => {
-      const imageLink = "../../assets/book-placeholder.png";
+      const imageLink = "book-placeholder.png";
       const imageElement = wrapper.find("[data-test='book-image']");
       expect(imageElement.prop("src")).toEqual(imageLink);
     });
