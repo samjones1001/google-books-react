@@ -1,20 +1,20 @@
 import React from 'react';
 import { shallow } from 'enzyme'
 
-import BookContainer from './BookContainer';
+import BookList from './BookList';
 import Book from '../Book/Book'
 import { testData } from '../../assets/TestData';
 
-describe('BookContainer component', () => {
+describe('BookList component', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<BookContainer books={ testData.items }/>);
+    wrapper = shallow(<BookList books={ testData.items }/>);
   });
 
   it('renders withour crashing', () => {
-    const containerComponent = wrapper.find("[data-test='component-book-container']");
-    expect(containerComponent.exists()).toBe(true);
+    const listComponent = wrapper.find("[data-test='component-book-list']");
+    expect(listComponent.exists()).toBe(true);
   });
 
   it('renders the correct number of Book components', () => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import App from './App';
-import BookContainer from '../BookContainer/BookContainer';
+import BookList from '../BookList/BookList';
 
 describe('App Component', () => {
   let wrapper;
@@ -16,8 +16,8 @@ describe('App Component', () => {
     expect(appComponent.exists()).toBe(true);
   });
 
-  it('renders a BookContainer component', () => {
-    const bookContainerComponent = wrapper.find(BookContainer);
-    expect(bookContainerComponent.exists()).toBe(true);
+  it('renders a BookList component', () => {
+    const bookListComponent = wrapper.find(BookList);
+    expect(bookListComponent.exists()).toBe(true);
   });
 })

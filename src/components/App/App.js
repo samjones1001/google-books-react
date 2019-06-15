@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import BookContainer from '../BookContainer/BookContainer';
+import BookList from '../BookList/BookList';
 import { testData } from '../../assets/TestData';
 
 function App() {
   return (
     <div className="App" data-test="component-app">
-      <BookContainer books={testData.items}/>
+      <BookList books={testData.items}/>
     </div>
   );
 }
