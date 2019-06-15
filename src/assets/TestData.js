@@ -28,7 +28,6 @@ export const testData = {"items" : [
   {
     "title": "Programming Pearls",
     "authors": ["Jon Bentley"],
-    "publisher": "Addison-Wesley Professional",
     "imageLink": "http://books.google.com/books/content?id=4gX0CwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api" ,
     "infoLink": "https://play.google.com/store/books/details?id=4gX0CwAAQBAJ&source=gbs_api"
   }

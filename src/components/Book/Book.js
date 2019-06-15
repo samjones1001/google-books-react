@@ -1,10 +1,14 @@
 import React from 'react';
 
 const Book = (props) => {
-  const { title, authors, publisher, infoLink } = props
+  const { title, authors, infoLink } = props
   const imageLink = props.imageLink !== undefined
     ? props.imageLink
     : '../../assets/book-placeholder.png'
+
+  const publisher = props.publisher !== undefined
+    ? props.publisher
+    : 'No publiher found'
 
   const buildAuthorString = () => {
     return authors !== undefined

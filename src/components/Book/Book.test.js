@@ -84,7 +84,7 @@ describe('Book component', () => {
       expect(bookComponent.exists()).toBe(true);
     });
 
-    it('renders an error string', () => {
+    it('renders a placeholder string', () => {
       const authorElement = wrapper.find("[data-test='book-author']");
       expect(authorElement.text().length).not.toBe(0)
     })
@@ -106,6 +106,24 @@ describe('Book component', () => {
       const authorString = props.authors.join(', ')
       const authorElement = wrapper.find("[data-test='book-author']");
       expect(authorElement.text()).toEqual(authorString)
+    });
+  });
+
+  describe('when passed no publisher information', () => {
+    const props = testData.items[4];
+
+    beforeEach(() => {
+      wrapper = shallow(<Book { ...props }/>);
+    });
+
+    it('renders without crashing', () => {
+      const bookComponent = wrapper.find("[data-test='component-book']");
+      expect(bookComponent.exists()).toBe(true);
+    });
+
+    it('renders a placeholder string', () => {
+      const publisherElement = wrapper.find("[data-test='book-publisher']");
+      expect(publisherElement.text().length).not.toBe(0);
     });
   });
 });
