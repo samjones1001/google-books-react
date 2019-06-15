@@ -8,7 +8,7 @@ const Book = (props) => {
 
   const publisher = props.publisher !== undefined
     ? props.publisher
-    : 'No publiher found';
+    : 'No publisher found';
 
   const buildAuthorString = () => {
     return authors !== undefined
