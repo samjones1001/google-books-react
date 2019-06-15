@@ -70,5 +70,19 @@ describe('Book component', () => {
       let imageElement = wrapper.find("[data-test='book-image']");
       expect(imageElement.prop("src")).toEqual(imageLink);
     });
-  })
+  });
+
+  describe('when passed no author', () => {
+    const props = testData.items[2];
+
+    beforeEach(() => {
+      wrapper = shallow(<Book { ...props }/>);
+    });
+
+    it('renders without crashing', () => {
+      const bookComponent = wrapper.find("[data-test='component-book']");
+      expect(bookComponent.exists()).toBe(true);
+    });
+
+  });
 });

@@ -14,7 +14,6 @@ export const testData = {"items" : [
   },
   {
     "title": "Programming In C",
-    "authors": ["D Ravichandran"],
     "publisher": "New Age International",
     "imageLink": "http://books.google.com/books/content?id=CEc2WsZkxUsC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api" ,
     "infoLink": "http://books.google.co.uk/books?id=CEc2WsZkxUsC&dq=programming&hl=&source=gbs_api"
