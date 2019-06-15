@@ -4,7 +4,7 @@ const Book = (props) => {
   const { title, authors, infoLink } = props
   const imageLink = props.imageLink !== undefined
     ? props.imageLink
-    : '../../assets/book-placeholder.png'
+    : '../../book-placeholder.png'
 
   const publisher = props.publisher !== undefined
     ? props.publisher

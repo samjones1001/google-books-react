@@ -3,6 +3,7 @@ import Enzyme, { shallow } from 'enzyme'
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 
 import BookContainer from './BookContainer';
+import Book from '../Book/Book'
 import { testData } from '../../assets/TestData';
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
@@ -20,7 +21,7 @@ describe('BookContainer component', () => {
   });
 
   it('renders the correct number of Book components', () => {
-    const bookComponents = wrapper.find("[data-test='book-div']");
+    const bookComponents = wrapper.find(Book);
     expect(bookComponents.length).toBe(5);
   })
 });
