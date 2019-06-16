@@ -93,6 +93,25 @@ describe('App Component', () => {
           });
         });
       });
+
+      it('removes any previous error message', (done) => {
+        wrapper.setState({ message: 'test error message' });
+        const newValue = "testing component"
+        const inputElement = findByTestAttr(wrapper, 'search-input');
+        inputElement.simulate('change', { target: { value: newValue }});
+        findByTestAttr(wrapper, 'component-search').simulate('submit');
+
+        moxios.wait(() => {
+          const request = moxios.requests.mostRecent();
+          request.respondWith({
+            status: 200,
+            response: testData
+          }).then(() => {
+            expect(wrapper.state().message.length).toEqual(0);
+            done();
+          });
+        });
+      })
     });
 
     describe('on failure', () => {

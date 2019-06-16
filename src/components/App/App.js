@@ -22,6 +22,7 @@ class App extends Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault();
+    this.setState({ message: '' })
 
     axios.get('https://www.googleapis.com/books/v1/volumes', {
       params: {
