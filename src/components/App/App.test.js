@@ -19,7 +19,7 @@ describe('App Component', () => {
   })
 
   it('renders without crashing', () => {
-    const appComponent = findByTestAttr(wrapper, 'component-app');
+    const appComponent = wrapper.find('.component-app');
     expect(appComponent.exists()).toBe(true);
   });
 
@@ -40,7 +40,7 @@ describe('App Component', () => {
 
   it('reflects changes to Search component input in state', () => {
     const newValue = "testing component";
-    const inputElement = findByTestAttr(wrapper, 'search-input')
+    const inputElement = wrapper.find('.search-input');
     inputElement.simulate('change', { target: { value: newValue }});
     expect(wrapper.state().searchTerm).toEqual(newValue);
   });

@@ -4,7 +4,6 @@ import { shallow } from 'enzyme'
 import BookList from './BookList';
 import Book from '../Book/Book'
 import { testData } from '../../assets/TestData';
-import { findByTestAttr } from '../../utils/testUtils';
 
 describe('BookList component', () => {
   let wrapper;
@@ -14,7 +13,7 @@ describe('BookList component', () => {
   });
 
   it('renders withour crashing', () => {
-    const listComponent = findByTestAttr(wrapper, 'component-book-list')
+    const listComponent = wrapper.find('.component-book-list')
     expect(listComponent.exists()).toBe(true);
   });
 

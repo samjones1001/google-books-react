@@ -1,6 +1,7 @@
 import React from 'react';
+import './Message.css';
 
 const Message = props =>
-  <div data-test="component-message">{ props.messageText }</div>
+  <div className="component-message">{ props.messageText }</div>
 
 export default Message;

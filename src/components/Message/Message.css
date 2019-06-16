@@ -1,0 +1,8 @@
+.component-message {
+  color: grey;
+  width: 70%;
+  margin: 5vh auto;
+  padding: 10px;
+  font-size: 30px;
+  font-weight: 600;
+}

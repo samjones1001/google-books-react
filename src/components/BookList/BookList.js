@@ -3,7 +3,7 @@ import Book from '../Book/Book';
 
 const BookList = ({ books }) => {
   return (
-    <div data-test="component-book-list">
+    <div className="component-book-list">
       { books.map((book, index) => (
         <Book { ...book } key={index}/>
       ))}

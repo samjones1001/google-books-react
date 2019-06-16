@@ -1,0 +1,40 @@
+.component-book {
+  background-color: #e8eaed;
+  width: 50vw;
+  height: 30vh;
+  display: inline-block;
+  margin-top: 5vh;
+  box-shadow: 2px 5px 3px #ccc;
+}
+
+.container {
+  display: inline-grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.book-image {
+  height: 25vh;
+  box-shadow: 2px 5px 3px #ccc;
+  margin-top: 15px;
+  margin-left: 5vw;
+  max-width: 130px;
+}
+
+.book-title {
+  font-size: 1.5em;
+  margin: 5px 0px;
+  margin-top: 5vh;
+}
+
+.book-info-link {
+  border: none;
+  color: white;
+  background-color: #1ba322;
+  font-size: 20px;
+  line-height: 4vh;
+  border-radius: 10px;
+  box-shadow: 2px 5px 3px #ccc;;
+  padding: 8px 16px;
+  font-weight: 600;
+  text-decoration: none;
+}

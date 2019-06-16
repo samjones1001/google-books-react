@@ -47,7 +47,7 @@ class App extends Component {
     const { searchTerm, results, message } = this.state;
 
     return (
-      <div className="App" data-test="component-app">
+      <div className="component-app">
         <Search
           placeholderText="Please search by author or title"
           buttonText="search"
