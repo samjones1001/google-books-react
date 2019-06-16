@@ -107,7 +107,7 @@ describe('App Component', () => {
             status: 200,
             response: testData
           }).then(() => {
-            expect(wrapper.state().message.length).toEqual(0);
+            expect(wrapper.state().message).toBeFalsy;
             done();
           });
         });
