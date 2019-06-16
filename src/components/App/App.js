@@ -12,7 +12,7 @@ class App extends Component {
     this.state = {
       searchTerm: '',
       results: [],
-      error: ''
+      message: 'No results yet'
     }
   }
 
@@ -35,14 +35,14 @@ class App extends Component {
       this.setState({ results: response.data.items })
     })
     .catch((error) => {
-      this.setState({ error: error.response.data.error.message })
+      this.setState({ message: error.response.data.error.message })
     });
 
     this.setState({ searchTerm: '' })
   }
 
   render() {
-    const { searchTerm, results, error } = this.state;
+    const { searchTerm, results, message } = this.state;
 
     return (
       <div className="App" data-test="component-app">
@@ -54,10 +54,8 @@ class App extends Component {
           handleSubmit={ this.handleFormSubmit }
         />
         <BookList books={ results }/>
-        {error.length > 0 &&
-          <h2>
-            { error }
-          </h2>
+        {message.length > 0 &&
+          <h2 data-test="app-message">{ message }</h2>
         }
       </div>
     );

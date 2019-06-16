@@ -40,6 +40,11 @@ describe('App Component', () => {
     expect(wrapper.state().searchTerm).toEqual(newValue);
   });
 
+  it('renders an initial message prior to api request', () => {
+    const messageElement = findByTestAttr(wrapper, 'app-message');
+    expect(messageElement.text().length).not.toEqual(0);
+  });
+
   describe('makes requests to an api', () => {
     let wrapper;
 
@@ -104,7 +109,7 @@ describe('App Component', () => {
             status: 500,
             response: { error }
           }).then(() => {
-            expect(wrapper.state().error.length).not.toEqual(0);
+            expect(wrapper.state().message.length).not.toEqual(0);
             done();
           });
         });
