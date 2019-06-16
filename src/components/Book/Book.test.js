@@ -45,7 +45,7 @@ describe('Book component', () => {
     });
 
     it('renders a link to the book\'s info page', () => {
-      const infoLink = testData.items[0].volumeInfo.infolink;
+      const infoLink = testData.items[0].volumeInfo.infoLink;
       const infoLinkElement = findByTestAttr(wrapper, 'book-info-link')
       expect(infoLinkElement.prop('href')).toEqual(infoLink);
     });
