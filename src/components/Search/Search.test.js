@@ -9,8 +9,8 @@ describe('Search Component', () => {
 
   beforeEach(() => {
     wrapper = shallow(
-      <
-        Search placeholderText="This is a test"
+      < Search
+        placeholderText="This is a test"
         buttonText="test"
       />
     );
