@@ -83,8 +83,29 @@ describe('App Component', () => {
             status: 200,
             response: testData
           }).then(() => {
-            expect(wrapper.state().results.length).toEqual(5)
-            done()
+            expect(wrapper.state().results.length).toEqual(5);
+            done();
+          });
+        });
+      });
+    });
+
+    describe('on failure', () => {
+      it('retrieves an error message and stores it in state', (done) => {
+        const error = new Error('Test Error')
+        const newValue = "testing component";
+        const inputElement = findByTestAttr(wrapper, 'search-input');
+        inputElement.simulate('change', { target: { value: newValue }});
+        findByTestAttr(wrapper, 'component-search').simulate('submit');
+
+        moxios.wait(() => {
+          const request = moxios.requests.mostRecent();
+          request.respondWith({
+            status: 500,
+            response: { error }
+          }).then(() => {
+            expect(wrapper.state().error.length).not.toEqual(0);
+            done();
           });
         });
       });
