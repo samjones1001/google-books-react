@@ -21,31 +21,31 @@ describe('Book component', () => {
     });
 
     it('renders the passed title', () => {
-      const title = props.title;
+      const title = props.volumeInfo.title;
       const titleElement = findByTestAttr(wrapper, 'book-title')
       expect(titleElement.text()).toEqual(title);
     });
 
     it('renders the passed image', () => {
-      const imageLink = props.imagelink;
+      const imageLink = props.volumeInfo.imageLinks.thumbnail;
       const imageElement = findByTestAttr(wrapper, 'book-image')
       expect(imageElement.prop("src")).toEqual(imageLink);
     });
 
     it('renders the passed author', () => {
-      const author = props.authors[0];
+      const author = props.volumeInfo.authors[0];
       const authorElement = findByTestAttr(wrapper, 'book-author')
       expect(authorElement.text()).toEqual(author);
     });
 
     it('renders the passed publisher', () => {
-      const publisher = props.publisher;
+      const publisher = props.volumeInfo.publisher;
       const publisherElement = findByTestAttr(wrapper, 'book-publisher')
       expect(publisherElement.text()).toEqual(publisher);
     });
 
     it('renders a link to the book\'s info page', () => {
-      const infoLink = testData.items[0].infolink;
+      const infoLink = testData.items[0].volumeInfo.infolink;
       const infoLinkElement = findByTestAttr(wrapper, 'book-info-link')
       expect(infoLinkElement.prop('href')).toEqual(infoLink);
     });
@@ -101,7 +101,7 @@ describe('Book component', () => {
     });
 
     it('renders authors names as a comma separated list', () => {
-      const authorString = props.authors.join(', ')
+      const authorString = props.volumeInfo.authors.join(', ')
       const authorElement = findByTestAttr(wrapper, 'book-author')
       expect(authorElement.text()).toEqual(authorString)
     });

@@ -1,14 +1,14 @@
 import React from 'react';
 
 const Book = (props) => {
-  const { title, authors, imagelink, publisher, infolink } = props
-  const imageUrl = imagelink
-    ? imagelink : require('../../assets/book-placeholder.png');
+  const { title, authors, imageLinks, publisher, infolink } = props.volumeInfo
+  const imageUrl = imageLinks
+    ? imageLinks.thumbnail : require('../../assets/book-placeholder.png');
   const publisherString = publisher ? publisher : 'No publisher found';
   const authorString = authors ? authors.join(', ') : 'No author found';
 
   return (
-    <div data-test="component-book" { ...props }>
+    <div data-test="component-book">
       <h3 data-test="book-title">{ title }</h3>
       <img
         src={ imageUrl }
