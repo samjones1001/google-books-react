@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import BookList from '../BookList/BookList';
 import Search from '../Search/Search';
+import Message from '../Message/Message';
 import { queryAPI } from '../../utils/utilFunctions';
 
 class App extends Component {
@@ -57,7 +58,7 @@ class App extends Component {
         />
         <BookList books={ results }/>
         {message &&
-          <h2 data-test="app-message">{ message }</h2>
+          <Message messageText={ message }/>
         }
       </div>
     );

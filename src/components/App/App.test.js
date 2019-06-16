@@ -7,6 +7,7 @@ import App from './App';
 import BookList from '../BookList/BookList';
 import Book from '../Book/Book';
 import Search from '../Search/Search';
+import Message from '../Message/Message';
 import { testData } from '../../assets/TestData';
 import { findByTestAttr } from '../../utils/testUtils';
 
@@ -41,8 +42,8 @@ describe('App Component', () => {
   });
 
   it('renders an initial message prior to api request', () => {
-    const messageElement = findByTestAttr(wrapper, 'app-message');
-    expect(messageElement.text().length).not.toEqual(0);
+    const messageElement = wrapper.find(Message);
+    expect(messageElement.exists()).toBe(true);
   });
 
   describe('makes requests to an api', () => {
