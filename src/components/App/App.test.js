@@ -1,10 +1,13 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import axios from 'axios';
+import moxios from 'moxios';
 
 import App from './App';
 import BookList from '../BookList/BookList';
+import Book from '../Book/Book';
 import Search from '../Search/Search';
-
+import { testData } from '../../assets/TestData';
 import { findByTestAttr } from '../../utils/testUtils';
 
 describe('App Component', () => {
@@ -37,12 +40,54 @@ describe('App Component', () => {
     expect(wrapper.state().searchTerm).toEqual(newValue);
   });
 
-  it('resets Search Component value on submit', () => {
-    const newValue = "testing component";
-    const inputElement = findByTestAttr(wrapper, 'search-input');
+  describe('makes requests to an api', () => {
+    let wrapper;
 
-    inputElement.simulate('change', { target: { value: newValue }});
-    findByTestAttr(wrapper, 'component-search').simulate('submit');
-    expect(wrapper.state().searchTerm.length).toEqual(0);
-  })
+    beforeEach(() => {
+      moxios.install();
+      wrapper = mount(<App />);
+    });
+
+    afterEach(() => {
+      moxios.uninstall();
+    });
+
+    it('resets Search Component value', (done) => {
+      const newValue = "testing component";
+      const inputElement = findByTestAttr(wrapper, 'search-input');
+      inputElement.simulate('change', { target: { value: newValue }});
+      findByTestAttr(wrapper, 'component-search').simulate('submit');
+
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: testData
+        }).then(() => {
+          expect(wrapper.state().searchTerm.length).toEqual(0);
+          done();
+        });
+      });
+    });
+
+    describe('on success', () => {
+      it('retrieves a list of books and stores them in state', (done) => {
+        const newValue = "testing component";
+        const inputElement = findByTestAttr(wrapper, 'search-input');
+        inputElement.simulate('change', { target: { value: newValue }});
+        findByTestAttr(wrapper, 'component-search').simulate('submit');
+
+        moxios.wait(() => {
+          const request = moxios.requests.mostRecent();
+          request.respondWith({
+            status: 200,
+            response: testData
+          }).then(() => {
+            expect(wrapper.state().results.length).toEqual(5)
+            done()
+          });
+        });
+      });
+    })
+  });
 })

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 import './App.css';
 import BookList from '../BookList/BookList';
 import Search from '../Search/Search';
-
-import { testData } from '../../assets/TestData';
 
 class App extends Component {
   constructor() {
@@ -11,6 +11,7 @@ class App extends Component {
 
     this.state = {
       searchTerm: '',
+      results: []
     }
   }
 
@@ -20,11 +21,26 @@ class App extends Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault();
+
+    axios.get('https://www.googleapis.com/books/v1/volumes', {
+      params: {
+        q: this.state.searchTerm,
+        key: process.env.REACT_APP_GOOGLE_KEY,
+        maxResults: 20,
+        fields: 'items(volumeInfo(authors, title, publisher, infoLink, imageLinks/thumbnail))'
+      }
+    })
+    .then((response) => {
+      this.setState({ results: response.data.items })
+    })
+    .catch((error) => {
+    });
+    
     this.setState({ searchTerm: '' })
   }
 
   render() {
-    const { searchTerm } = this.state;
+    const { searchTerm, results } = this.state;
 
     return (
       <div className="App" data-test="component-app">
@@ -35,7 +51,7 @@ class App extends Component {
           handleChange={ this.handleInputChange }
           handleSubmit={ this.handleFormSubmit }
         />
-        <BookList books={testData.items}/>
+        <BookList books={ results }/>
       </div>
     );
   }
