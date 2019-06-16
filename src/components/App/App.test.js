@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 
 import App from './App';
 import BookList from '../BookList/BookList';
+import { findByTestAttr } from '../../utils/testUtils';
 
 describe('App Component', () => {
   let wrapper;
@@ -12,7 +13,7 @@ describe('App Component', () => {
   })
 
   it('renders without crashing', () => {
-    const appComponent = wrapper.find("[data-test='component-app']");
+    const appComponent = findByTestAttr(wrapper, 'component-app')
     expect(appComponent.exists()).toBe(true);
   });
 
