@@ -7,7 +7,12 @@ describe('Search Component', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<Search />);
+    wrapper = shallow(
+      <
+        Search placeholderText="This is a test"
+        buttonText="test"
+      />
+    );
   });
 
   it('renders without crashing', () => {
@@ -20,8 +25,18 @@ describe('Search Component', () => {
     expect(inputElement.exists()).toBe(true);
   });
 
+  it('renders the passed placeholder text', () => {
+    const inputElement = wrapper.find("[data-test='search-input']");
+    expect(inputElement.prop('placeholder')).toEqual('This is a test');
+  });
+
   it('renders a button', () => {
     const buttonElement = wrapper.find("[data-test='search-button']");
     expect(buttonElement.exists()).toBe(true);
-  })
+  });
+
+  it('renders the passed button text', () => {
+    const buttonElement = wrapper.find("[data-test='search-button']");
+    expect(buttonElement.text()).toEqual('test');
+  });
 });
