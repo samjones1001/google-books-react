@@ -36,4 +36,13 @@ describe('App Component', () => {
     inputElement.simulate('change', { target: { value: newValue }});
     expect(wrapper.state().searchTerm).toEqual(newValue);
   });
+
+  it('resets Search Component value on submit', () => {
+    const newValue = "testing component";
+    const inputElement = findByTestAttr(wrapper, 'search-input');
+
+    inputElement.simulate('change', { target: { value: newValue }});
+    findByTestAttr(wrapper, 'component-search').simulate('submit');
+    expect(wrapper.state().searchTerm.length).toEqual(0);
+  })
 })

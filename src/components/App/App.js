@@ -16,7 +16,11 @@ class App extends Component {
 
   handleInputChange = (e) => {
     this.setState({ searchTerm: e.target.value })
-    console.log(this.state.searchTerm)
+  }
+
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    this.setState({ searchTerm: '' })
   }
 
   render() {
@@ -29,6 +33,7 @@ class App extends Component {
           buttonText="search"
           searchTerm={ searchTerm }
           handleChange={ this.handleInputChange }
+          handleSubmit={ this.handleFormSubmit }
         />
         <BookList books={testData.items}/>
       </div>

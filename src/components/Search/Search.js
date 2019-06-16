@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Search = ({ placeholderText, buttonText, searchTerm, handleChange }) => {
+const Search = ({ placeholderText, buttonText, searchTerm, handleChange, handleSubmit }) => {
   return (
-    <form data-test="component-search">
+    <form data-test="component-search" onSubmit={ handleSubmit }>
       <input
         type="text"
         data-test="search-input"
