@@ -9,7 +9,7 @@ import Book from '../Book/Book';
 import Search from '../Search/Search';
 import Message from '../Message/Message';
 import { testData } from '../../assets/TestData';
-import { findByTestAttr } from '../../utils/testUtils';
+import { findByTestAttr, enterAndSubmitQuery } from '../../utils/testUtils';
 
 describe('App Component', () => {
   let wrapper;
@@ -33,25 +33,21 @@ describe('App Component', () => {
     expect(bookListComponent.exists()).toBe(true);
   });
 
-  it('reflects changes to Search component input in state', () => {
-    const newValue = "testing component";
-    const inputElement = findByTestAttr(wrapper, 'search-input')
-
-    inputElement.simulate('change', { target: { value: newValue }});
-    expect(wrapper.state().searchTerm).toEqual(newValue);
-  });
-
   it('renders an initial message prior to api request', () => {
     const messageElement = wrapper.find(Message);
     expect(messageElement.exists()).toBe(true);
   });
 
-  describe('makes requests to an api', () => {
-    let wrapper;
+  it('reflects changes to Search component input in state', () => {
+    const newValue = "testing component";
+    const inputElement = findByTestAttr(wrapper, 'search-input')
+    inputElement.simulate('change', { target: { value: newValue }});
+    expect(wrapper.state().searchTerm).toEqual(newValue);
+  });
 
+  describe('makes requests to an api', () => {
     beforeEach(() => {
       moxios.install();
-      wrapper = mount(<App />);
     });
 
     afterEach(() => {
@@ -59,11 +55,7 @@ describe('App Component', () => {
     });
 
     it('resets Search Component value', (done) => {
-      const newValue = "testing component";
-      const inputElement = findByTestAttr(wrapper, 'search-input');
-      inputElement.simulate('change', { target: { value: newValue }});
-      findByTestAttr(wrapper, 'component-search').simulate('submit');
-
+      enterAndSubmitQuery(wrapper)
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
@@ -78,11 +70,7 @@ describe('App Component', () => {
 
     describe('on success', () => {
       it('retrieves a list of books and stores them in state', (done) => {
-        const newValue = "testing component";
-        const inputElement = findByTestAttr(wrapper, 'search-input');
-        inputElement.simulate('change', { target: { value: newValue }});
-        findByTestAttr(wrapper, 'component-search').simulate('submit');
-
+        enterAndSubmitQuery(wrapper)
         moxios.wait(() => {
           const request = moxios.requests.mostRecent();
           request.respondWith({
@@ -97,18 +85,14 @@ describe('App Component', () => {
 
       it('removes any previous error message', (done) => {
         wrapper.setState({ message: 'test error message' });
-        const newValue = "testing component"
-        const inputElement = findByTestAttr(wrapper, 'search-input');
-        inputElement.simulate('change', { target: { value: newValue }});
-        findByTestAttr(wrapper, 'component-search').simulate('submit');
-
+        enterAndSubmitQuery(wrapper)
         moxios.wait(() => {
           const request = moxios.requests.mostRecent();
           request.respondWith({
             status: 200,
             response: testData
           }).then(() => {
-            expect(wrapper.state().message).toBeFalsy;
+            expect(wrapper.state().message).toBeFalsy();
             done();
           });
         });
@@ -118,11 +102,7 @@ describe('App Component', () => {
     describe('on failure', () => {
       it('retrieves an error message and stores it in state', (done) => {
         const error = new Error('Test Error')
-        const newValue = "testing component";
-        const inputElement = findByTestAttr(wrapper, 'search-input');
-        inputElement.simulate('change', { target: { value: newValue }});
-        findByTestAttr(wrapper, 'component-search').simulate('submit');
-
+        enterAndSubmitQuery(wrapper)
         moxios.wait(() => {
           const request = moxios.requests.mostRecent();
           request.respondWith({

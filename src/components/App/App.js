@@ -9,7 +9,6 @@ import { queryAPI } from '../../utils/utilFunctions';
 class App extends Component {
   constructor() {
     super();
-
     this.state = {
       searchTerm: '',
       results: [],
