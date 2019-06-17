@@ -5,7 +5,11 @@ import BookList from '../BookList/BookList';
 import Search from '../Search/Search';
 import Message from '../Message/Message';
 import Loader from '../Loader/Loader';
-import { queryAPI } from '../../utils/utilFunctions';
+import {
+  queryAPI,
+  retrieveResultsFromResponse,
+  retrieveErrorFromResponse
+} from '../../utils/utilFunctions';
 
 class App extends Component {
   constructor() {
@@ -32,19 +36,24 @@ class App extends Component {
     }
 
     e.preventDefault();
-    this.setState({ message: false, loading: true, results: [] })
-    queryAPI(base_url, params, this.handleSuccess, this.handleFailure)
-    this.setState({ searchTerm: '' })
+    this.setState({ message: false, loading: true, results: [] });
+    queryAPI(base_url, params, this.handleSuccess, this.handleFailure);
   }
 
-  handleSuccess = (results) => {
-    results = results.data.items !== undefined ? results.data.items : [];
-    const message = results.length === 0 ?  'No results found - please search again' : false;
-    this.setState({ results, message, loading: false });
+  handleSuccess = (response) => {
+    const results = retrieveResultsFromResponse(response)
+    const message = results.length === 0
+      ?  'No results found - please search again'
+      : false;
+    this.setState({ results, message, loading: false, searchTerm: '' });
   }
 
   handleFailure = (error) => {
-    this.setState({ message : error.response.data.error.message, loading: false });
+    this.setState({
+      message : retrieveErrorFromResponse(error),
+      loading: false,
+      searchTerm: ''
+    });
   }
 
   render() {

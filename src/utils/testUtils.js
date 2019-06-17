@@ -20,3 +20,25 @@ export const makeMockRequest = (wrapper, expectation, done) => {
     });
   });
 }
+
+export const retrieveBookField = (bookObject, field) => {
+  switch (field) {
+    case 'authors':
+      return bookObject.volumeInfo.authors;
+      break;
+    case 'title':
+      return bookObject.volumeInfo.title;
+      break;
+    case 'publisher':
+      return bookObject.volumeInfo.publisher;
+      break;
+    case 'infoLink':
+      return bookObject.volumeInfo.infoLink;
+      break;
+    case 'imageLink':
+      return bookObject.volumeInfo.imageLinks.thumbnail;
+      break;
+    default:
+      return
+  }
+}

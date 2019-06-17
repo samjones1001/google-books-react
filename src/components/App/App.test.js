@@ -92,7 +92,6 @@ describe('App Component', () => {
           status: 200,
           response: testData
         }).then(() => {
-          console.log(wrapper.state().loading)
           expect(wrapper.state().loading).toBe(false);
           done();
         })

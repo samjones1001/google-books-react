@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 
 import Book from './Book';
 import { testData } from '../../assets/TestData';
+import { retrieveBookField } from '../../utils/testUtils.js';
 
 describe('Book component', () => {
   let wrapper;
@@ -20,31 +21,31 @@ describe('Book component', () => {
     });
 
     it('renders the passed title', () => {
-      const title = props.volumeInfo.title;
+      const title = retrieveBookField(props, 'title');
       const titleElement = wrapper.find('.book-title')
       expect(titleElement.text()).toEqual(title);
     });
 
     it('renders the passed image', () => {
-      const imageLink = props.volumeInfo.imageLinks.thumbnail;
+      const imageLink = retrieveBookField(props, 'imageLink');
       const imageElement = wrapper.find('.book-image')
       expect(imageElement.prop("src")).toEqual(imageLink);
     });
 
     it('renders the passed author', () => {
-      const author = props.volumeInfo.authors[0];
+      const author = retrieveBookField(props, 'authors')[0];
       const authorElement = wrapper.find('.book-author')
       expect(authorElement.text()).toEqual(author);
     });
 
     it('renders the passed publisher', () => {
-      const publisher = props.volumeInfo.publisher;
+      const publisher = retrieveBookField(props, 'publisher');
       const publisherElement = wrapper.find('.book-publisher')
       expect(publisherElement.text()).toEqual(publisher);
     });
 
     it('renders a link to the book\'s info page', () => {
-      const infoLink = testData.items[0].volumeInfo.infoLink;
+      const infoLink = retrieveBookField(props, 'infoLink');
       const infoLinkElement = wrapper.find('.book-info-link')
       expect(infoLinkElement.prop('href')).toEqual(infoLink);
     });
@@ -100,7 +101,7 @@ describe('Book component', () => {
     });
 
     it('renders authors names as a comma separated list', () => {
-      const authorString = props.volumeInfo.authors.join(', ')
+      const authorString = retrieveBookField(props, 'authors').join(', ')
       const authorElement = wrapper.find('.book-author')
       expect(authorElement.text()).toEqual(authorString)
     });
