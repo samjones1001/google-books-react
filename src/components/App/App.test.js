@@ -127,7 +127,21 @@ describe('App Component', () => {
             done();
           });
         });
-      })
+      });
+
+      it('stores an error message if no results are returned', (done) => {
+        enterAndSubmitQuery(wrapper)
+        moxios.wait(() => {
+          const request = moxios.requests.mostRecent();
+          request.respondWith({
+            status: 200,
+            response: {}
+          }).then(() => {
+            expect(wrapper.state().message.length).not.toEqual(0);
+            done();
+          });
+        });
+      });
     });
 
     describe('on failure', () => {

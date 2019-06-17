@@ -38,11 +38,13 @@ class App extends Component {
   }
 
   handleSuccess = (results) => {
-    this.setState({ results: results.data.items, loading: false });
+    results = results.data.items !== undefined ? results.data.items : [];
+    const message = results.length === 0 ?  'No results found - please search again' : false;
+    this.setState({ results, message, loading: false });
   }
 
-  handleFailure = (message) => {
-    this.setState({ message : message.response.data.error.message, loading: false });
+  handleFailure = (error) => {
+    this.setState({ message : error.response.data.error.message, loading: false });
   }
 
   render() {
