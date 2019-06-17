@@ -8,6 +8,7 @@ import BookList from '../BookList/BookList';
 import Book from '../Book/Book';
 import Search from '../Search/Search';
 import Message from '../Message/Message';
+import Loader from '../Loader/Loader';
 import { testData } from '../../assets/TestData';
 import { findByTestAttr, enterAndSubmitQuery } from '../../utils/testUtils';
 
@@ -67,6 +68,36 @@ describe('App Component', () => {
         });
       });
     });
+
+    it('renders a Loader component during the request', (done) => {
+      enterAndSubmitQuery(wrapper)
+      const loaderComponent = wrapper.find(Loader);
+      expect(loaderComponent.exists()).toBe(true)
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: testData
+        }).then(() => {
+          done();
+        });
+      });
+    });
+
+    it('removes the Loader once the request is resolved', (done) => {
+      enterAndSubmitQuery(wrapper)
+      const loaderComponent = wrapper.find(Loader);
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: testData
+        }).then(() => {
+          expect(loaderComponent.exists()).toBe(true)
+          done();
+        });
+      });
+    })
 
     describe('on success', () => {
       it('retrieves a list of books and stores them in state', (done) => {

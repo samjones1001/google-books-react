@@ -4,6 +4,7 @@ import './App.css';
 import BookList from '../BookList/BookList';
 import Search from '../Search/Search';
 import Message from '../Message/Message';
+import Loader from '../Loader/Loader';
 import { queryAPI } from '../../utils/utilFunctions';
 
 class App extends Component {
@@ -12,7 +13,8 @@ class App extends Component {
     this.state = {
       searchTerm: '',
       results: [],
-      message: 'No results yet'
+      message: 'No results yet',
+      loading: false
     }
   }
 
@@ -30,21 +32,21 @@ class App extends Component {
     }
 
     e.preventDefault();
-    this.setState({ message: false })
+    this.setState({ message: false, loading: true })
     queryAPI(base_url, params, this.setResults, this.setMessage)
     this.setState({ searchTerm: '' })
   }
 
   setResults = (results) => {
-    this.setState({ results: results.data.items });
+    this.setState({ results: results.data.items, loading: false });
   }
 
   setMessage = (message) => {
-    this.setState({ message : message.response.data.error.message });
+    this.setState({ message : message.response.data.error.message, loading: false });
   }
 
   render() {
-    const { searchTerm, results, message } = this.state;
+    const { searchTerm, results, message, loading } = this.state;
 
     return (
       <div className="component-app">
@@ -58,6 +60,9 @@ class App extends Component {
         <BookList books={ results }/>
         {message &&
           <Message messageText={ message }/>
+        }
+        {loading &&
+          <Loader />
         }
       </div>
     );
