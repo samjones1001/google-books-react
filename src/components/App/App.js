@@ -43,7 +43,7 @@ class App extends Component {
   handleSuccess = (response) => {
     const results = retrieveResultsFromResponse(response)
     const message = results.length === 0
-      ?  'No results found - please search again'
+      ? 'No results found - please search again'
       : false;
     this.setState({ results, message, loading: false, searchTerm: '' });
   }

@@ -29,7 +29,7 @@ describe('Book component', () => {
     it('renders the passed image', () => {
       const imageLink = retrieveBookField(props, 'imageLink');
       const imageElement = wrapper.find('.book-image')
-      expect(imageElement.prop("src")).toEqual(imageLink);
+      expect(imageElement.prop('src')).toEqual(imageLink);
     });
 
     it('renders the passed author', () => {
@@ -64,9 +64,9 @@ describe('Book component', () => {
     });
 
     it('renders with a placeholder image', () => {
-      const imageLink = "book-placeholder.png";
+      const imageLink = 'book-placeholder.png';
       const imageElement = wrapper.find('.book-image')
-      expect(imageElement.prop("src")).toEqual(imageLink);
+      expect(imageElement.prop('src')).toEqual(imageLink);
     });
   });
 
