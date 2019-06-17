@@ -32,16 +32,16 @@ class App extends Component {
     }
 
     e.preventDefault();
-    this.setState({ message: false, loading: true })
-    queryAPI(base_url, params, this.setResults, this.setMessage)
+    this.setState({ message: false, loading: true, results: [] })
+    queryAPI(base_url, params, this.handleSuccess, this.handleFailure)
     this.setState({ searchTerm: '' })
   }
 
-  setResults = (results) => {
+  handleSuccess = (results) => {
     this.setState({ results: results.data.items, loading: false });
   }
 
-  setMessage = (message) => {
+  handleFailure = (message) => {
     this.setState({ message : message.response.data.error.message, loading: false });
   }
 
