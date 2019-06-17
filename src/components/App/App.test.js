@@ -86,18 +86,18 @@ describe('App Component', () => {
 
     it('removes the Loader once the request is resolved', (done) => {
       enterAndSubmitQuery(wrapper)
-      const loaderComponent = wrapper.find(Loader);
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
           status: 200,
           response: testData
         }).then(() => {
-          expect(loaderComponent.exists()).toBe(true)
+          console.log(wrapper.state().loading)
+          expect(wrapper.state().loading).toBe(false);
           done();
-        });
+        })
       });
-    })
+    });
 
     describe('on success', () => {
       it('retrieves a list of books and stores them in state', (done) => {

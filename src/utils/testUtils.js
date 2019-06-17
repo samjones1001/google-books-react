@@ -8,7 +8,7 @@ export const enterAndSubmitQuery = (wrapper) => {
   wrapper.find('.component-search').simulate('submit');
 }
 
-export const makeMockRequest = (expectation, done) => {
+export const makeMockRequest = (wrapper, expectation, done) => {
   moxios.wait(() => {
     const request = moxios.requests.mostRecent();
     request.respondWith({
