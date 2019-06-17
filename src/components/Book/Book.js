@@ -21,7 +21,7 @@ const Book = (props) => {
         <h3 className="book-title">{ title }</h3>
         <p className="book-author">{ authorString }</p>
         <p className="book-publisher">{ publisherString }</p>
-        <a href={ infoLink } className="book-info-link">More Info</a>
+        <a href={ infoLink } className="book-info-link btn">More Info</a>
       </div>
     </div>
   );

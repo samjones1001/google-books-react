@@ -1,7 +1,18 @@
-body {
-  background-color: #edeff2;
-}
+/* ------------- */
+/* APP COMPONENT */
+/* ------------- */
 
 .component-app {
   text-align: center;
+}
+
+/* --------- */
+/* APP TITLE */
+/* --------- */
+
+.app-title {
+  color: grey;
+  font-size: 3em;
+  padding-top: 3vh;
+  font-family: sans-serif;
 }

@@ -61,6 +61,7 @@ class App extends Component {
 
     return (
       <div className="component-app">
+        <h1 className="app-title">Book Search</h1>
         <Search
           placeholderText="Please search by author or title"
           buttonText="search"

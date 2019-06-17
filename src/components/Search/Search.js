@@ -11,7 +11,7 @@ const Search = ({ placeholderText, buttonText, searchTerm, handleChange, handleS
         placeholder={ placeholderText }
         onChange={ handleChange }
       />
-      <button type="submit" className="search-button">{ buttonText }</button>
+      <button type="submit" className="search-button btn">{ buttonText }</button>
     </form>
   )
 }

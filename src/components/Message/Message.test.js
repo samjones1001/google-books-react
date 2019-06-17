@@ -7,7 +7,7 @@ describe('Message component', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<Message messageText="test message"/>);
+    wrapper = shallow(<Message messageText='test message'/>);
   });
 
   it('renders without crashing', () => {
@@ -17,6 +17,6 @@ describe('Message component', () => {
 
   it('renders with the passed text', () => {
     const messageComponent = wrapper.find('.component-message');
-    expect(messageComponent.text()).toEqual("test message")
+    expect(messageComponent.text()).toEqual('test message')
   })
 });

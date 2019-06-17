@@ -1,3 +1,7 @@
+/* -------------- */
+/* BOOK COMPONENT */
+/* -------------- */
+
 .component-book {
   width: 50vw;
   margin-top: 5vh;
@@ -14,6 +18,10 @@
   grid-template-columns: 1fr 2fr;
 }
 
+/* ---------------- */
+/* BOOK INFOMRATION */
+/* ---------------- */
+
 .book-image {
   height: 25vh;
   box-shadow: 2px 5px 3px #ccc;
@@ -29,22 +37,15 @@
 }
 
 .book-info-link {
-  color: white;
-  background-color: #1ba322;
-  font-size: 20px;
-  line-height: 4vh;
   border-radius: 10px;
-  box-shadow: 2px 5px 3px #ccc;;
-  padding: 8px 16px;
-  font-weight: 600;
   text-decoration: none;
 }
 
-.book-info-link:hover {
-  background-color: #127a17
-}
+/* ------------- */
+/* MEDIA QUERIES */
+/* ------------- */
 
-@media (max-width: 650px) {
+@media (max-width: 700px) {
   .container {
     grid-template-columns: 1fr;
   }
