@@ -40,12 +40,16 @@ As part of my TDD process I had been making small refactors as I built out the a
 - I found at one point that there were a number of places in my code base where my tests were quite tightly bound to the structure of the data being returned from the API - had the structure of the API response been altered for some reason this would have required my code to be updated in multiple places. I've tried to get past this by centralising my reliance on structure as much as possible to a single function in the testUtils file. There is still some coupling here, but in the event of a change being required it should only need to happen here.
 - The same problem is present to some extent in my Book component - I've tried to minimise this, but am aware that some dependency does still remain.
 - The asynchronous tests around connecting to the API proved somewhat challenging to implement. Once I understood the pattern required by moxios I was able to get the tests running, but in some cases - particularly my test for ensuring that the Loader component disappeared on completion of a request - I found that when testing against elements being rendered to the DOM my expectations were still running prior to the required change being completed. I was able to get around this by testing the internal state of my components, which was updating in time, but this felt more like a work around than a solution.
+- I wanted to ensure that I was obscuring my API keys and not pushing them to Github. I was able to follow the advice in [this this stackoverflow post](https://stackoverflow.com/questions/48699820/how-do-i-hide-api-key-in-create-react-app), but this seems like an imperfect solution. Aside from building a backend for the project, which seems out of scope for the task, I'm not sure how to improve upon this. 
 
 ### Resources Used
 
 - [Google Books API Documentation](https://developers.google.com/books/docs/overview)
+- [Enzyme Documentation](https://airbnb.io/enzyme/docs/api/selector.html)
 - [Moxios Documentation](https://github.com/axios/moxios)
 - [Moxios Github Issue on Mocking Error Responses](https://github.com/axios/moxios/issues/6)
+- [React Spinners Documentation](https://github.com/davidhu2000/react-spinners)
+- [Advice on Obscuring Credentials in React](https://stackoverflow.com/questions/48699820/how-do-i-hide-api-key-in-create-react-app)
 
 ### Further Development
 
