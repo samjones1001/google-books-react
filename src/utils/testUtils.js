@@ -1,4 +1,4 @@
-import { testData } from '../assets/TestData';
+import { testData } from '../fixtures/TestData';
 
 export const enterAndSubmitQuery = (wrapper) => {
   const newValue = "testing component";

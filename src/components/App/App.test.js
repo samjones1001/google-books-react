@@ -9,7 +9,7 @@ import Book from '../Book/Book';
 import Search from '../Search/Search';
 import Message from '../Message/Message';
 import Loader from '../Loader/Loader';
-import { testData } from '../../assets/TestData';
+import { testData } from '../../fixtures/TestData';
 import { findByTestAttr, enterAndSubmitQuery } from '../../utils/testUtils';
 
 describe('App Component', () => {

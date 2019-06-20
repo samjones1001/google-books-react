@@ -58,7 +58,6 @@ class App extends Component {
 
   render() {
     const { searchTerm, results, message, loading } = this.state;
-    console.log(results)
     return (
       <div className="component-app">
         <h1 className="app-title">Book Search</h1>

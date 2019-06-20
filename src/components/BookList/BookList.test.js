@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 
 import BookList from './BookList';
 import Book from '../Book/Book'
-import { testData } from '../../assets/TestData';
+import { testData } from '../../fixtures/TestData';
 
 describe('BookList component', () => {
   let wrapper;

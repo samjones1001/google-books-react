@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import Book from './Book';
-import { testData } from '../../assets/TestData';
+import { testData } from '../../fixtures/TestData';
 import { retrieveBookField } from '../../utils/testUtils.js';
 
 describe('Book component', () => {
