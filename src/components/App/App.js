@@ -31,7 +31,7 @@ class App extends Component {
     };
 
     e.preventDefault();
-    this.setState({ message: false, loading: true, results: [] });
+    this.setState({ message: '', loading: true, results: [] });
     queryAPI(base_url, params, this.handleSuccess, this.handleFailure);
   };
 
@@ -39,7 +39,7 @@ class App extends Component {
     const results = retrieveResultsFromResponse(response);
     const message = results.length === 0
       ? 'No results found - please search again'
-      : false;
+      : '';
     this.setState({ results, message, loading: false, searchTerm: '' });
   };
 
