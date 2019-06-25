@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import Search from './Search';
+import { enterAndSubmitQuery } from '../../utils/testUtils';
 
 describe('Search Component', () => {
   let wrapper;
@@ -11,6 +12,7 @@ describe('Search Component', () => {
       < Search
         placeholderText="This is a test"
         buttonText="test"
+        handleSubmit={ jest.fn() }
       />
     );
   });
@@ -38,5 +40,28 @@ describe('Search Component', () => {
   it('renders the passed button text', () => {
     const buttonElement = wrapper.find('.search-button');
     expect(buttonElement.text()).toEqual('test');
+  });
+
+  it('has an initial empty searchTerm state', () => {
+    expect(wrapper.state().searchTerm.length).toEqual(0)
+  });
+
+  it('reflects changes to input in state', () => {
+    const newValue = 'testing component';
+    const inputElement = wrapper.find('.search-input');
+    inputElement.simulate('change', { target: { value: newValue }});
+    expect(wrapper.state().searchTerm).toEqual(newValue);
+  });
+
+  describe('on submission', () => {
+    it('resets searchTerm state', () => {
+      enterAndSubmitQuery(wrapper);
+      expect(wrapper.state().searchTerm.length).toEqual(0);
+    });
+
+    it('calls the function passed as handleSubmit prop', () => {
+      enterAndSubmitQuery(wrapper);
+      expect(wrapper.instance().props.handleSubmit).toHaveBeenCalledTimes(1);
+    });
   });
 });

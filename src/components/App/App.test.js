@@ -10,7 +10,7 @@ import Search from '../Search/Search';
 import Message from '../Message/Message';
 import Loader from '../Loader/Loader';
 import { testData } from '../../fixtures/TestData';
-import { findByTestAttr, enterAndSubmitQuery } from '../../utils/testUtils';
+import { enterAndSubmitQuery } from '../../utils/testUtils';
 
 describe('App Component', () => {
   let wrapper;
@@ -39,13 +39,6 @@ describe('App Component', () => {
     expect(messageElement.exists()).toBe(true);
   });
 
-  it('reflects changes to Search component input in state', () => {
-    const newValue = 'testing component';
-    const inputElement = wrapper.find('.search-input');
-    inputElement.simulate('change', { target: { value: newValue }});
-    expect(wrapper.state().searchTerm).toEqual(newValue);
-  });
-
   describe('makes requests to an api', () => {
     beforeEach(() => {
       moxios.install();
@@ -53,20 +46,6 @@ describe('App Component', () => {
 
     afterEach(() => {
       moxios.uninstall();
-    });
-
-    it('resets Search Component value', (done) => {
-      enterAndSubmitQuery(wrapper);
-      moxios.wait(() => {
-        const request = moxios.requests.mostRecent();
-        request.respondWith({
-          status: 200,
-          response: testData
-        }).then(() => {
-          expect(wrapper.state().searchTerm.length).toEqual(0);
-          done();
-        });
-      });
     });
 
     it('renders a Loader component during the request', (done) => {

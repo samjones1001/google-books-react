@@ -15,21 +15,16 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      searchTerm: '',
       results: [],
       message: 'No results yet',
       loading: false
     };
   };
 
-  handleInputChange = (e) => {
-    this.setState({ searchTerm: e.target.value });
-  };
-
-  handleFormSubmit = (e) => {
+  handleFormSubmit = (e, searchTerm) => {
     const base_url = 'https://www.googleapis.com/books/v1/volumes';
     const params = {
-      q: this.state.searchTerm,
+      q: searchTerm,
       key: process.env.REACT_APP_GOOGLE_KEY,
       maxResults: 20,
       fields: 'items(volumeInfo(authors, title, publisher, infoLink, imageLinks/thumbnail))'
@@ -57,15 +52,13 @@ class App extends Component {
   };
 
   render() {
-    const { searchTerm, results, message, loading } = this.state;
+    const { results, message, loading } = this.state;
     return (
       <div className="component-app">
         <h1 className="app-title">Book Search</h1>
         <Search
           placeholderText="Please search by author or title"
           buttonText="search"
-          searchTerm={ searchTerm }
-          handleChange={ this.handleInputChange }
           handleSubmit={ this.handleFormSubmit }
         />
         <BookList books={ results }/>
