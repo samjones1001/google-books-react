@@ -1,8 +1,8 @@
 import React from 'react';
-import './Book.css'
+import './Book.css';
 
 const Book = (props) => {
-  const { title, authors, imageLinks, publisher, infoLink } = props.volumeInfo
+  const { title, authors, imageLinks, publisher, infoLink } = props.volumeInfo;
   const imageUrl = imageLinks
     ? imageLinks.thumbnail : require('../../assets/book-placeholder.png');
   const publisherString = publisher ? publisher : 'No publisher found';
@@ -25,6 +25,6 @@ const Book = (props) => {
       </div>
     </div>
   );
-}
+};
 
 export default Book;

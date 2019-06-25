@@ -17,7 +17,7 @@ describe('App Component', () => {
 
   beforeEach(() => {
     wrapper = mount(<App />);
-  })
+  });
 
   it('renders without crashing', () => {
     const appComponent = wrapper.find('.component-app');
@@ -56,7 +56,7 @@ describe('App Component', () => {
     });
 
     it('resets Search Component value', (done) => {
-      enterAndSubmitQuery(wrapper)
+      enterAndSubmitQuery(wrapper);
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
@@ -70,9 +70,9 @@ describe('App Component', () => {
     });
 
     it('renders a Loader component during the request', (done) => {
-      enterAndSubmitQuery(wrapper)
+      enterAndSubmitQuery(wrapper);
       const loaderComponent = wrapper.find(Loader);
-      expect(loaderComponent.exists()).toBe(true)
+      expect(loaderComponent.exists()).toBe(true);
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
@@ -85,7 +85,7 @@ describe('App Component', () => {
     });
 
     it('removes the Loader once the request is resolved', (done) => {
-      enterAndSubmitQuery(wrapper)
+      enterAndSubmitQuery(wrapper);
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
@@ -94,13 +94,13 @@ describe('App Component', () => {
         }).then(() => {
           expect(wrapper.state().loading).toBe(false);
           done();
-        })
+        });
       });
     });
 
     describe('on success', () => {
       it('retrieves a list of books and stores them in state', (done) => {
-        enterAndSubmitQuery(wrapper)
+        enterAndSubmitQuery(wrapper);
         moxios.wait(() => {
           const request = moxios.requests.mostRecent();
           request.respondWith({
@@ -115,7 +115,7 @@ describe('App Component', () => {
 
       it('removes any previous error message', (done) => {
         wrapper.setState({ message: 'test error message' });
-        enterAndSubmitQuery(wrapper)
+        enterAndSubmitQuery(wrapper);
         moxios.wait(() => {
           const request = moxios.requests.mostRecent();
           request.respondWith({
@@ -129,7 +129,7 @@ describe('App Component', () => {
       });
 
       it('stores an error message if no results are returned', (done) => {
-        enterAndSubmitQuery(wrapper)
+        enterAndSubmitQuery(wrapper);
         moxios.wait(() => {
           const request = moxios.requests.mostRecent();
           request.respondWith({
@@ -145,8 +145,8 @@ describe('App Component', () => {
 
     describe('on failure', () => {
       it('retrieves an error message and stores it in state', (done) => {
-        const error = new Error('Test Error')
-        enterAndSubmitQuery(wrapper)
+        const error = new Error('Test Error');
+        enterAndSubmitQuery(wrapper);
         moxios.wait(() => {
           const request = moxios.requests.mostRecent();
           request.respondWith({
@@ -158,6 +158,6 @@ describe('App Component', () => {
           });
         });
       });
-    })
+    });
   });
-})
+});

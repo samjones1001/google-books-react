@@ -8,7 +8,7 @@ const BookList = ({ books }) => {
         <Book { ...book } key={index}/>
       ))}
     </div>
-  )
-}
+  );
+};
 
 export default BookList;

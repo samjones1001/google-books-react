@@ -17,6 +17,6 @@ describe('Message component', () => {
 
   it('renders with the passed text', () => {
     const messageComponent = wrapper.find('.component-message');
-    expect(messageComponent.text()).toEqual('test message')
-  })
+    expect(messageComponent.text()).toEqual('test message');
+  });
 });

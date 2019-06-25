@@ -14,8 +14,8 @@ export const retrieveResultsFromResponse = (responseObject) => {
   return responseObject.data.items !== undefined
     ? responseObject.data.items
     : [];
-}
+};
 
 export const retrieveErrorFromResponse = (responseObject) => {
-  return responseObject.response.data.error.message
-}
+  return responseObject.response.data.error.message;
+};
