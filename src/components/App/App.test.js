@@ -71,7 +71,9 @@ describe('App Component', () => {
           status: 200,
           response: testData
         }).then(() => {
-          expect(wrapper.state().loading).toBe(false);
+          wrapper.update();
+          const loaderComponent = wrapper.find(Loader);
+          expect(loaderComponent.exists()).toBe(false);
           done();
         });
       });
@@ -107,7 +109,7 @@ describe('App Component', () => {
         });
       });
 
-      it('stores an error message if no results are returned', (done) => {
+      it('displays an error message if no results are returned', (done) => {
         enterAndSubmitQuery(wrapper);
         moxios.wait(() => {
           const request = moxios.requests.mostRecent();
@@ -115,7 +117,9 @@ describe('App Component', () => {
             status: 200,
             response: {}
           }).then(() => {
-            expect(wrapper.state().message.length).not.toEqual(0);
+            wrapper.update();
+            const messageComponent = wrapper.find(Message);
+            expect(messageComponent.exists()).toBe(true);
             done();
           });
         });
@@ -132,7 +136,9 @@ describe('App Component', () => {
             status: 500,
             response: { error }
           }).then(() => {
-            expect(wrapper.state().message.length).not.toEqual(0);
+            wrapper.update();
+            const messageComponent = wrapper.find(Message);
+            expect(messageComponent.exists()).toBe(true);
             done();
           });
         });
