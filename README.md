@@ -87,7 +87,7 @@ As part of the feedback process, I was also asked to answer the following questi
     * At this point, the App component would likely be becoming bloated and holding a lot of state. This might be a trigger to introduce redux into the application.
 
   * If, as I suspect, data needed to be persisted over multiple browser sessions, My first instinct was that I would need to build a backend for the application. However, after some research I think I prefer the approach detailed in [this article](https://www.robinwieruch.de/local-storage-react/).
-      * If follwoing the first method of building a backend, the implementation would be similar to the previous approach in terms of the components required, but rather than pushing data to arrays held internally in the application, I would make calls to endpoints on my backend system in order to store the information in a database.
+      * If following the first method of building a backend, the implementation would be similar to the previous approach in terms of the components required, but rather than pushing data to arrays held internally in the application, I would make calls to endpoints on my backend system in order to store the information in a database.
 
       * This approach would also require some sort of user authentication to be added to the application, so would probably need SignIn and Login components to be created. In addition, relying solely on the backend would remove the ability to re-render past search results without making an http request. For this reason, I would consider also retaining the simple client side caching I described above.
 
