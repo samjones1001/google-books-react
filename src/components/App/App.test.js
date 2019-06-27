@@ -29,15 +29,43 @@ describe('App Component', () => {
     expect(searchComponent.exists()).toBe(true);
   });
 
+  it('passes a default string into the Search component as the placeholderText prop', () => {
+    const defaultString = "Please search by author or title";
+    const searchComponent = wrapper.find(Search);
+    expect(searchComponent.prop('placeholderText')).toEqual(defaultString);
+  });
+
+  it('passes a default string into the Search component as the buttonText prop', () => {
+    const defaultString = "search";
+    const searchComponent = wrapper.find(Search);
+    expect(searchComponent.prop('buttonText')).toEqual(defaultString);
+  });
+
+  it('passes a function into the Seach component as the handleSubmit prop', () => {
+    const defaultFunction = wrapper.instance().handleFormSubmit;
+    const searchComponent = wrapper.find(Search);
+    expect(searchComponent.prop('handleSubmit')).toEqual(defaultFunction);
+  })
+
   it('renders a BookList component', () => {
     const bookListComponent = wrapper.find(BookList);
     expect(bookListComponent.exists()).toBe(true);
   });
 
-  it('renders an initial message prior to api request', () => {
-    const messageElement = wrapper.find(Message);
-    expect(messageElement.exists()).toBe(true);
+  it('passes results state to the BookList component as a prop', () => {
+    const bookListComponent = wrapper.find(BookList);
+    expect(bookListComponent.prop('books')).toEqual(wrapper.state('results'));
   });
+
+  it('renders an initial message prior to api request', () => {
+    const messageComponent = wrapper.find(Message);
+    expect(messageComponent.exists()).toBe(true);
+  });
+
+  it('passes message state to the Message component as a prop', () => {
+    const messageComponent = wrapper.find(Message);
+    expect(messageComponent.prop('messageText')).toEqual(wrapper.state('message'));
+  })
 
   describe('makes requests to an api', () => {
     beforeEach(() => {

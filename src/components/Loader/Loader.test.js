@@ -20,4 +20,9 @@ describe('Loader component', () => {
     const beatLoaderComponent = wrapper.find(BeatLoader);
     expect(beatLoaderComponent.exists()).toBe(true);
   });
+
+  it('passes true into the BeatLoader component as a prop', () => {
+    const beatLoaderComponent = wrapper.find(BeatLoader);
+    expect(beatLoaderComponent.prop('loading')).toBe(true);
+  });
 });
