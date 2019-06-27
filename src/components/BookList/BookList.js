@@ -1,5 +1,6 @@
 import React from 'react';
 import Book from '../Book/Book';
+import PropTypes from 'prop-types';
 
 const BookList = ({ books }) => {
   return (
@@ -9,6 +10,12 @@ const BookList = ({ books }) => {
       ))}
     </div>
   );
+};
+
+BookList.propTypes = {
+  books: PropTypes.arrayOf(
+    PropTypes.object
+  )
 };
 
 export default BookList;

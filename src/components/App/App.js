@@ -19,7 +19,7 @@ class App extends Component {
       message: 'No results yet',
       loading: false
     };
-  };
+  }
 
   handleFormSubmit = (e, searchTerm) => {
     const base_url = 'https://www.googleapis.com/books/v1/volumes';
@@ -70,7 +70,7 @@ class App extends Component {
         }
       </div>
     );
-  };
-};
+  }
+}
 
 export default App;

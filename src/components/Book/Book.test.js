@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-
+import checkPropTypes from 'check-prop-types';
 import Book from './Book';
 import { testData } from '../../fixtures/TestData';
 import { retrieveBookField } from '../../utils/testUtils.js';
@@ -18,6 +18,11 @@ describe('Book component', () => {
     it('renders without crashing', () => {
       const bookComponent = wrapper.find('.component-book');
       expect(bookComponent.exists()).toBe(true);
+    });
+
+    it('does not throw warning with expected props', () => {
+      const propError = checkPropTypes(Book.propTypes, props, 'prop', Book.name);
+      expect(propError).toBeUndefined();
     });
 
     it('renders the passed title', () => {

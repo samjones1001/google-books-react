@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { BeatLoader } from 'react-spinners';
+import { BeatLoader } from 'react-spinners'
 
 import Loader from './Loader';
 

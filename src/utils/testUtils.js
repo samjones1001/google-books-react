@@ -5,7 +5,7 @@ export const enterAndSubmitQuery = (wrapper) => {
   const inputElement = wrapper.find('.search-input');
   inputElement.simulate('change', { target: { value: newValue }});
   wrapper.find('.component-search').simulate('submit');
-};
+}
 
 export const retrieveBookField = (bookObject, field) => {
   switch (field) {
@@ -26,5 +26,5 @@ export const retrieveBookField = (bookObject, field) => {
       break;
     default:
       return;
-  };
-};
+  }
+}

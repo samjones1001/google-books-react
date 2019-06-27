@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import checkPropTypes from 'check-prop-types';
 
 import Search from './Search';
 import { enterAndSubmitQuery } from '../../utils/testUtils';
@@ -20,6 +21,12 @@ describe('Search Component', () => {
   it('renders without crashing', () => {
     const searchComponent = wrapper.find('.component-search');
     expect(searchComponent.exists()).toBe(true);
+  });
+
+  it('does not throw warning with expected props', () => {
+    const expectedProps = { placeholderText: 'test', buttonText: 'text', handleSubmit: jest.fn() };
+    const propError = checkPropTypes(Search.propTypes, expectedProps, 'prop', Search.name);
+    expect(propError).toBeUndefined();
   });
 
   it('renders an input element', () => {

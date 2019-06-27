@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import './Search.css';
 
 class Search extends Component {
@@ -7,7 +9,7 @@ class Search extends Component {
     this.state = {
       searchTerm: ''
     };
-  };
+  }
 
   handleChange = (e) => {
     this.setState({ searchTerm: e.target.value });
@@ -34,7 +36,13 @@ class Search extends Component {
         <button type="submit" className="search-button btn">{ buttonText }</button>
       </form>
     );
-  };
+  }
+}
+
+Search.propTypes = {
+  placeholderText: PropTypes.string.isRequired,
+  buttonText: PropTypes.string.isRequired,
+  handleSubmit: PropTypes.func.isRequired
 };
 
 export default Search;

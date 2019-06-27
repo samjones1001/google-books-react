@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Book.css';
 
 const Book = (props) => {
@@ -25,6 +26,16 @@ const Book = (props) => {
       </div>
     </div>
   );
+};
+
+Book.propTypes = {
+  volumeInfo: PropTypes.shape({
+    title: PropTypes.string,
+    authors: PropTypes.array,
+    imageLinks: PropTypes.object,
+    publisher: PropTypes.string,
+    infoLink: PropTypes.string
+  })
 };
 
 export default Book;
