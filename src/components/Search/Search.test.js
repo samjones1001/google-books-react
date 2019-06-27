@@ -50,7 +50,7 @@ describe('Search Component', () => {
   });
 
   it('has an initial empty searchTerm state', () => {
-    expect(wrapper.state().searchTerm.length).toEqual(0)
+    expect(wrapper.state().searchTerm.length).toEqual(0);
   });
 
   it('reflects changes to input in state', () => {

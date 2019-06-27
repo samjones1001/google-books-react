@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import checkPropTypes from 'check-prop-types';
+
 import Book from './Book';
 import { testData } from '../../fixtures/TestData';
 import { retrieveBookField } from '../../utils/testUtils.js';

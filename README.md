@@ -56,3 +56,57 @@ As part of my TDD process I had been making small refactors as I built out the a
 - Requests to the API can accept a query string which allows for pagination of results. I'd like to make use of this so that users can click through to additional results rather than being restricted to only the first 20.
 - The asynchronous tests in App.test.js contain a lot of repeated code for setting up a mock request. I'd like to abstract this out into a separate function in order to reduce repetition, but have yet to find a way to make this work.
 - The App component feels a little busy - in particular the `handleFormSubmit` function. I'd like to find a way to refactor it further.
+
+## Feedback
+
+Based on the feedback I received on the first version of this application, I have made the following changes;
+
+- Fixed the consistency of line ending semicolons.
+- Removed the need for maintaining `searchTerm` state in the App component and for passing a `handleChange` prop into the Search component by making Search responsible for maintaining its own state.
+- Fixed the `message` state of the App component as a string rather than allowing it to switch between a string and a boolean. Determining whether or not the Message component should be rendered now relies on the fact that an empty string evaluates as falsy.
+- Altered some tests for the App component to assert that child components are being rendered under certain conditions, rather than asserting only on the internal state of the App component.
+- Added propTypes and associated tests to all relevant components.
+- Added tests to assert that components are passing props correctly to their children. For some of these tests, where a component passes down a piece of its own state or a prop which it has received from its parent I'm happy with the approach I have taken. For others, such as the tests for the `placeholderText` and `buttonText` props received by the Search component which are set in the parent component's render function, I've had to assert against the particular values which are currently being passed in. I worry that this makes my tests brittle, as a change in the particular message being passed would break my tests, although the functionality would still be as expected - I'd like to find a better solution for this.
+
+As part of the feedback process, I was also asked to answer the following questions:
+
+- I saw that there weren't any propTypes for any of the components. How do you think your code could benefit from having them?
+  * Defining propTypes to a react component provides an extra layer of security against breaking changes being introduced into the application. If I take my Book component as an example, it a prop which is expected in a very specific format; an object with a number of key value pairs. One of these values should be an array, one an object, and the others strings.
+
+  If a component is passed a prop holding a datatype it does not expect, at best the component will render incorrectly impacting on the user's experience, at worst it will fail to render at all, potentially crashing the app in the process. Adding propTypes acts as a form of documentation for the component - the propTypes object clearly defines the 'interface' of the component for other developers or for myself in the future. In the event that some mistake is still made in passing the props that a component needs, a warning will also be displayed in the console making it very simple to debug the issue.     
+
+- How would your application need to change if you wanted to save books to a bookshelf and manage it? What if you wanted to save your book search history?
+
+  * I feel like there are several approaches that could be taken to meet this requirement, depending on how long the saved data needed to be persisted for:
+    * If data was only required to be persisted for the current session, this could be a relatively simple addition. For saving the search history I would update the App component's `handleSuccess` function to not only add the results of the API call to it's `results` state but also to push it to a separate `searchHistory` piece of state. I see this as an array of objects with the structure `{ searchTerm: resultsObejct }`. With this in place, I would also update the App component's `handleFormSubmit` function so that, prior to making a call to the API a check would be made against the `searchHistory` array for an object with a key matching the passed search term. If one was found that object would be returned and passed into the BookList component, if not the request would be initiated as usual. A SearchHistory component could also be introduced to display a list of previous search terms which a user could click on to see the results.
+
+    For saving books, I would add another piece of state to App called `bookshelf`, this time an array of objects each representing an individual book. I would pass a function - `saveBook` as a prop down through BookList into the Book component, and update the component with another button which would call this function on click. The function would push the data for the current book into the `bookshelf` state.
+
+    The bookshelf could then be viewed and managed by reusing my BookList and Book components to display the contents of the `bookshelf` state. The second button on the Book component could be repurposed as a delete button by passing down a different `deleteBook` function as a prop. I would likely also create a Nav component to allow users to switch between the main search screen and their bookshelf.
+
+    At this point, the App component would likely be becoming bloated and holding a lot of state. This might be a trigger to introduce redux into the application.
+
+    * If, as I suspect, data needed to be persisted over multiple browser sessions, My first instinct was that I would need to build a backend for the application. However, after some research I think I prefer the approach detailed in [this article](https://www.robinwieruch.de/local-storage-react/)
+      * If follwoing the first method of building a backend, the implementation would be similar to the previous approach in terms of the components required, but rather than pushing data to arrays held internally in the application, I would make calls to endpoints on my backend system in order to store the information in a database.
+
+      This approach would also require some sort of user authentication to be added to the application, so would probably need SignIn and Login components to be created. In addition, relying solely on the backend would remove the ability to re-render past search results without making an http request. For this reason, I would consider also retaining the simple client side caching I described above.
+
+      * The second option, and my preferred one, would be to make use of local storage.
+
+      Again, this approach would be very similar to the first in terms of the components required, but has the advantage over the others of being able to persist data over a page refresh without having to build a backend. Instead of communicating with a database, I would make use of the `localStorage.setItem`, `.getItem`, and `.removeItem` functions.
+
+      While I prefer this approach due to it being far more lightweight than creating a full backend, it does come with it's own disadvantages - the security settings on a user's browser could prevent the save features from working correctly, and all data would need to be converted to string format in order to be saved and then converted back again to be used by the application. 
+
+- Is the handleChange and searchTerm state needed? Is there a way to make this work without these?
+  * This question prompted me to look again at my App and Search components and I realised that holding the 'searchTerm' in App felt incorrect - it felt like it ought to be a piece of state internal to the Search component.
+
+  After promoting Search to a class component and making it responsible for maintaining the `searchTerm` state, I was also able to remove the need to pass down a `handleChange` prop from App - the business of controlling the value of the input through change events could now be internal to the Search component itself.
+
+  In order for the App component to still make requests to the API using the provided search term, I added a `handleSubmit` function to the Search component which, in turn called App's `handleFormSubmit` function, passing it the `searchTerm` state.
+
+- App.test.js lines 72 and 87: How come for the first test, you’re testing that the Loader component exists vs. in the second test, you’re testing that the loading state is false? I believe you’re ultimately testing for the same thing. Which of the two (component & state) ways of testing this, do you think, is better and why?
+  * This problem had bothered me when building the first version of the application - I had several asynchronous tests which I felt ought to assert on the existence of a rendered component, but found that my expectations were seemingly running too early. While my test wrapper's internal state had updated, the re-render which should have been triggered by this change had yet to happen.
+
+  This question prompted me to revisit these tests and I realised that my problem was that I was failing to call the `wrapper.update()` function. Once I added this, the tests functioned as I had originally wanted them to.
+
+  I prefer this approach because I feel that it gives a clearer indication that my components truly work as intended. If a child component is expected to render conditionally based on some piece of state belonging to it's parent, then simply testing that the state has updated does not properly test the parent component's behaviour. It would be entirely possible that the parent component's state had updated, but that it failed to render the child component.

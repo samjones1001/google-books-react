@@ -7,8 +7,8 @@ export const queryAPI = (url, params, successFunc, errFunc) => {
   })
   .catch((error) => {
     return errFunc(error);
-  })
-}
+  });
+};
 
 export const retrieveResultsFromResponse = (responseObject) => {
   return responseObject.data.items !== undefined
