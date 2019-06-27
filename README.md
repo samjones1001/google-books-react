@@ -73,7 +73,7 @@ As part of the feedback process, I was also asked to answer the following questi
 - I saw that there weren't any propTypes for any of the components. How do you think your code could benefit from having them?
   * Defining propTypes to a react component provides an extra layer of security against breaking changes being introduced into the application. If I take my Book component as an example, it a prop which is expected in a very specific format; an object with a number of key value pairs. One of these values should be an array, one an object, and the others strings.
 
-  If a component is passed a prop holding a datatype it does not expect, at best the component will render incorrectly impacting on the user's experience, at worst it will fail to render at all, potentially crashing the app in the process. Adding propTypes acts as a form of documentation for the component - the propTypes object clearly defines the 'interface' of the component for other developers or for myself in the future. In the event that some mistake is still made in passing the props that a component needs, a warning will also be displayed in the console making it very simple to debug the issue.     
+  * If a component is passed a prop holding a datatype it does not expect, at best the component will render incorrectly impacting on the user's experience, at worst it will fail to render at all, potentially crashing the app in the process. Adding propTypes acts as a form of documentation for the component - the propTypes object clearly defines the 'interface' of the component for other developers or for myself in the future. In the event that some mistake is still made in passing the props that a component needs, a warning will also be displayed in the console making it very simple to debug the issue.     
 
 - How would your application need to change if you wanted to save books to a bookshelf and manage it? What if you wanted to save your book search history?
 
@@ -86,7 +86,7 @@ As part of the feedback process, I was also asked to answer the following questi
 
     * At this point, the App component would likely be becoming bloated and holding a lot of state. This might be a trigger to introduce redux into the application.
 
-  * If, as I suspect, data needed to be persisted over multiple browser sessions, My first instinct was that I would need to build a backend for the application. However, after some research I think I prefer the approach detailed in [this article](https://www.robinwieruch.de/local-storage-react/)
+  * If, as I suspect, data needed to be persisted over multiple browser sessions, My first instinct was that I would need to build a backend for the application. However, after some research I think I prefer the approach detailed in [this article](https://www.robinwieruch.de/local-storage-react/).
       * If follwoing the first method of building a backend, the implementation would be similar to the previous approach in terms of the components required, but rather than pushing data to arrays held internally in the application, I would make calls to endpoints on my backend system in order to store the information in a database.
 
       * This approach would also require some sort of user authentication to be added to the application, so would probably need SignIn and Login components to be created. In addition, relying solely on the backend would remove the ability to re-render past search results without making an http request. For this reason, I would consider also retaining the simple client side caching I described above.
